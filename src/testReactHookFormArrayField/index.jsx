@@ -34,12 +34,11 @@ const TestReactHookForm = ({ handleOnSubmit, defaultValues, isLoading }) => {
     useEffect(() => {
         const currentProp = parseInt(periods);
         const previousProp = fields.length;
-        console.log({ periods, previousProp, currentProp });
         if (currentProp > previousProp) {
             for (let i = previousProp; i < currentProp; i++) {
                 append({
                     baseConsumption: null,
-                    finalDate: new Date(),
+                    finalDate: new Date().toLocaleDateString(),
                     initialDate: new Date(),
                     intermadiateConsumption: null,
                     peakConsumption: null,
@@ -58,84 +57,86 @@ const TestReactHookForm = ({ handleOnSubmit, defaultValues, isLoading }) => {
                 Toggle Periods
             </Button>
             <form onSubmit={handleSubmit(onSubmit)}>
-                {fields.map((item, i) => {
+                {fields.map((_, i) => {
                     return (
                         <div key={i} className="mt-3 mb-2">
-                            <strong className="text-primary">
-                                Periodo {i + 1}
-                            </strong>
-                            <div className="form-group">
-                                <TextField
-                                    errors={errors}
-                                    name={`periods[${i}].initialDate`}
-                                    register={register}
-                                    type="text"
-                                />
-
-                                <TextField
-                                    errors={errors}
-                                    name={`periods[${i}].finalDate`}
-                                    register={register}
-                                    type="text"
-                                />
-
-                                <TextField
-                                    errors={errors}
-                                    min={0}
-                                    name={`periods[${i}].baseConsumption`}
-                                    label="Base (kWh)"
-                                    register={register}
-                                    type="number"
-                                />
-
-                                <TextField
-                                    errors={errors}
-                                    name={`periods[${i}].intermadiateConsumption`}
-                                    label="Intermediate (kWh)"
-                                    register={register}
-                                    type="text"
-                                />
-
-                                <TextField
-                                    errors={errors}
-                                    name={`periods[${i}].peakConsumption`}
-                                    label="Peak (kWh)"
-                                    register={register}
-                                    type="number"
-                                />
-
-                                <TextField
-                                    errors={errors}
-                                    name={`periods[${i}].totalConsumption`}
-                                    label="Total (kWh)"
-                                    register={register}
-                                    type="number"
-                                />
-
-                                <TextField
-                                    errors={errors}
-                                    name={`periods[${i}].baseDemand`}
-                                    label="Base (kW)"
-                                    register={register}
-                                    type="number"
-                                />
-
-                                <TextField
-                                    errors={errors}
-                                    name={`periods[${i}].intermadiateDemand`}
-                                    label="Itermediate (kW)"
-                                    register={register}
-                                    type="number"
-                                />
-
-                                <TextField
-                                    errors={errors}
-                                    name={`periods[${i}].peakDemand`}
-                                    label="Peak (kW)"
-                                    register={register}
-                                    type="number"
-                                />
+                            <div>
+                                <strong className="text-primary">
+                                    Periodo {i + 1}
+                                </strong>
                             </div>
+
+                            <TextField
+                                errors={errors}
+                                name={`periods[${i}].initialDate`}
+                                register={register}
+                                type="date"
+                                step="2"
+                            />
+
+                            <TextField
+                                errors={errors}
+                                name={`periods[${i}].finalDate`}
+                                register={register}
+                                type="date"
+                            />
+
+                            <TextField
+                                errors={errors}
+                                min={0}
+                                name={`periods[${i}].baseConsumption`}
+                                label="Base (kWh)"
+                                register={register}
+                                type="number"
+                            />
+
+                            <TextField
+                                errors={errors}
+                                name={`periods[${i}].intermadiateConsumption`}
+                                label="Intermediate (kWh)"
+                                register={register}
+                                type="text"
+                            />
+
+                            <TextField
+                                errors={errors}
+                                name={`periods[${i}].peakConsumption`}
+                                label="Peak (kWh)"
+                                register={register}
+                                type="number"
+                            />
+
+                            <TextField
+                                errors={errors}
+                                name={`periods[${i}].totalConsumption`}
+                                label="Total (kWh)"
+                                register={register}
+                                type="number"
+                            />
+
+                            <TextField
+                                errors={errors}
+                                name={`periods[${i}].baseDemand`}
+                                label="Base (kW)"
+                                register={register}
+                                type="number"
+                            />
+
+                            <TextField
+                                errors={errors}
+                                name={`periods[${i}].intermadiateDemand`}
+                                label="Itermediate (kW)"
+                                register={register}
+                                type="number"
+                            />
+
+                            <TextField
+                                errors={errors}
+                                name={`periods[${i}].peakDemand`}
+                                label="Peak (kW)"
+                                register={register}
+                                type="number"
+                            />
                         </div>
                     );
                 })}
